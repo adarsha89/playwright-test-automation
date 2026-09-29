@@ -20,11 +20,15 @@ test.describe('Users API', () => {
     expect(validated.id).toBe(1);
   });
 
-  test('creates a user from generated test data', { tag: ['@api', '@api-create-user'] }, async ({ exampleClient, testData }) => {
-    const created = await exampleClient.createUser(testData.user);
+  test(
+    'creates a user from generated test data',
+    { tag: ['@api', '@api-create-user'] },
+    async ({ exampleClient, testData }) => {
+      const created = await exampleClient.createUser(testData.user);
 
-    const validated = expectSchema(created, userSchema);
-    expect(validated.name).toBe(testData.user.name);
-    expect(validated.email).toBe(testData.user.email);
-  });
+      const validated = expectSchema(created, userSchema);
+      expect(validated.name).toBe(testData.user.name);
+      expect(validated.email).toBe(testData.user.email);
+    },
+  );
 });

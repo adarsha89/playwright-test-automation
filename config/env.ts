@@ -28,12 +28,8 @@ function loadEnv(): Env {
   const parsed = envSchema.safeParse(process.env);
 
   if (!parsed.success) {
-    const issues = parsed.error.issues
-      .map((issue) => `  - ${issue.path.join('.')}: ${issue.message}`)
-      .join('\n');
-    throw new Error(
-      `Invalid or missing environment variables. Check your .env file against .env.example:\n${issues}`,
-    );
+    const issues = parsed.error.issues.map((issue) => `  - ${issue.path.join('.')}: ${issue.message}`).join('\n');
+    throw new Error(`Invalid or missing environment variables. Check your .env file against .env.example:\n${issues}`);
   }
 
   return parsed.data;

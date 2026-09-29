@@ -39,6 +39,6 @@ covering login and add-to-cart individually.
   that slice explicitly excludes.
 - Per this repo's CLAUDE.md rules: explore the checkout pages (info step,
   overview step, completion page) with `npx playwright codegen --output
-  docs/exploration/<slug>-codegen.ts https://www.saucedemo.com/` in headed
+docs/exploration/<slug>-codegen.ts https://www.saucedemo.com/` in headed
   mode before writing any test code — do not assume locators/copy from this
   doc.

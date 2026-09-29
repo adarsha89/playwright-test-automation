@@ -23,6 +23,10 @@ export default [
       'blob-report/**',
       'dist/**',
       'build/**',
+      // Playwright Test Agents seed file (`npx playwright init-agents`, see `.mcp.json`):
+      // an intentionally empty scaffold the planner/generator agents fill in. It's outside
+      // every project's `testMatch`, so it never runs as part of the suite.
+      'tests/seed.spec.ts',
     ],
   },
   {

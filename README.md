@@ -38,6 +38,7 @@ tests/
   api/                 API specs (api project)
 utils/
   network.ts           Network interception helpers (e.g. beacon assertions)
+  url.ts               joinUrl() — safe base-URL + path joining
   logger.ts             Logging helper
 ```
 
@@ -58,13 +59,13 @@ cp .env.example .env   # fill in real values, see below
 
 All env vars are read once through `config/env.ts` (Zod-validated at import time) — nothing else in the codebase reads `process.env` directly. See `.env.example` for the full list:
 
-| Variable | Purpose |
-|---|---|
-| `BASE_URL` | Base URL for the default UI project |
-| `API_BASE_URL` | Base URL for the `api` test project |
-| `TEST_USER_EMAIL` / `TEST_USER_PASSWORD` | Credentials used by the `authenticatedPage` fixture |
-| `API_AUTH_USERNAME` / `API_AUTH_PASSWORD` | Credentials used by `api/helpers/auth.helper.ts` |
-| `SAUCEDEMO_BASE_URL` | Base URL for the SauceDemo feature slice (login + cart tests) |
+| Variable                                  | Purpose                                                       |
+| ----------------------------------------- | ------------------------------------------------------------- |
+| `BASE_URL`                                | Base URL for the default UI project                           |
+| `API_BASE_URL`                            | Base URL for the `api` test project                           |
+| `TEST_USER_EMAIL` / `TEST_USER_PASSWORD`  | Credentials used by the `authenticatedPage` fixture           |
+| `API_AUTH_USERNAME` / `API_AUTH_PASSWORD` | Credentials used by `api/helpers/auth.helper.ts`              |
+| `SAUCEDEMO_BASE_URL`                      | Base URL for the SauceDemo feature slice (login + cart tests) |
 
 Each new target site/app gets its own dedicated `<SITE>_BASE_URL` var rather than repointing the shared `BASE_URL` (see `SAUCEDEMO_BASE_URL` for the pattern).
 
@@ -87,7 +88,8 @@ Every testcase carries Playwright `tag` options — a shared classification tag 
 ```bash
 npm run lint        # ESLint (flat config, eslint.config.mjs)
 npm run typecheck   # tsc --noEmit
-npm run format       # prettier --write .
+npm run format        # prettier --write .
+npm run format:check  # prettier --check . (CI gate)
 ```
 
 ## Notes
@@ -95,8 +97,21 @@ npm run format       # prettier --write .
 - **Users API tests** (`tests/api/example.spec.ts`, `@api-fetch-user-by-id` / `@api-create-user`) require `API_BASE_URL` to point at a backend implementing both `/auth/login` and `/users`. They will not pass against a public demo API with no auth layer (e.g. jsonplaceholder) — see `.env.example`.
 - **SauceDemo slice** (`tests/ui/saucedemo/`) has no mockable backend API; the only real interceptable network traffic is a pair of Backtrace.io analytics beacons, asserted via `utils/network.ts`'s `assertBacktraceEventsBeaconPair`.
 - `to_be_automated.md` lists scenarios identified but not yet automated (e.g. the SauceDemo full checkout journey).
-- Repo-specific automation conventions, learnings, and non-negotiable workflow rules (e.g. always explore pages headed before writing UI test code, never run Playwright tests inside the sandboxed shell) live in `CLAUDE.md`.
+- Repo-specific automation conventions, learnings, and non-negotiable workflow rules (e.g. always explore pages headed before writing UI test code, never run Playwright tests inside the sandboxed shell) live in `.ai/context/` — tool-agnostic, and loaded by any AI assistant via `CLAUDE.md` (Claude Code) or `AGENTS.md` (Codex, Cursor, Copilot, Gemini CLI, …). Skills and agents are in `.ai/skills/` and `.ai/agents/` (see `.ai/README.md`).
 
 ## CI
 
-The `Jenkinsfile` runs install → lint/typecheck (parallel) → sharded `playwright test`, publishing JUnit results and archiving the HTML report/test-results as build artifacts. `BASE_URL` and `API_BASE_URL` are injected via Jenkins credentials.
+The `Jenkinsfile` runs on the `mcr.microsoft.com/playwright:v<installed-version>-noble` image (keep the tag in lockstep with `@playwright/test` in `package-lock.json`): install → lint / typecheck / Prettier check (parallel) → `playwright test --shard=SHARD_INDEX/SHARD_TOTAL` (build parameters, default `1/1`), publishing JUnit results and archiving the HTML report/test-results. CI runs headless (`headless: !!process.env.CI`); local runs are headed.
+
+Every variable `config/env.ts` validates must exist in CI. Create these Jenkins secret-text credentials:
+
+| Credential ID           | Env var              |
+| ----------------------- | -------------------- |
+| `qa-base-url`           | `BASE_URL`           |
+| `qa-api-base-url`       | `API_BASE_URL`       |
+| `qa-test-user-email`    | `TEST_USER_EMAIL`    |
+| `qa-test-user-password` | `TEST_USER_PASSWORD` |
+| `qa-api-auth-username`  | `API_AUTH_USERNAME`  |
+| `qa-api-auth-password`  | `API_AUTH_PASSWORD`  |
+
+`SAUCEDEMO_BASE_URL` is a public demo URL and is set directly in the `Jenkinsfile`.
