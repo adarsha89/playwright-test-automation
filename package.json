@@ -8,8 +8,9 @@
   },
   "scripts": {
     "test": "playwright test",
-    "lint": "eslint . --ext .ts",
+    "lint": "eslint .",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [],

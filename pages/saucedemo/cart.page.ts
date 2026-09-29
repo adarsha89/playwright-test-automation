@@ -8,14 +8,16 @@ import { BasePage } from '../base.page';
  */
 export class CartPage extends BasePage {
   readonly cartItems: Locator;
+  readonly cartItemNames: Locator;
 
   constructor(page: Page) {
     super(page);
     this.cartItems = page.locator('.cart_item');
+    this.cartItemNames = this.cartItems.locator('[data-test="inventory-item-name"]');
   }
 
   async getCartItemNames(): Promise<string[]> {
-    return this.cartItems.locator('[data-test="inventory-item-name"]').allTextContents();
+    return this.cartItemNames.allTextContents();
   }
 
   async hasProduct(name: string): Promise<boolean> {

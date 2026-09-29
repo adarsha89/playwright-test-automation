@@ -5,6 +5,7 @@ import { UsersClient, type CreateUserPayload } from '../api/clients/example.clie
 import { buildUserPayload, buildLoginCredentials, type LoginCredentials } from '../data/builders/example.builder';
 import { LoginPage } from '../pages/saucedemo/login.page';
 import { SAUCEDEMO_USERS } from '../data/saucedemo/saucedemo-users.data';
+import { joinUrl } from '../utils/url';
 
 interface TestData {
   user: CreateUserPayload;
@@ -50,7 +51,7 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
   },
 
   authenticatedPage: async ({ page }, use) => {
-    await page.goto(`${env.BASE_URL}/login`);
+    await page.goto(joinUrl(env.BASE_URL, 'login'));
     await page.getByLabel('Email').fill(env.TEST_USER_EMAIL);
     await page.getByLabel('Password').fill(env.TEST_USER_PASSWORD);
     await page.getByRole('button', { name: 'Log in' }).click();
@@ -68,7 +69,7 @@ export const test = base.extend<TestFixtures, WorkerFixtures>({
     const loginPage = new LoginPage(page);
     await loginPage.open();
     await loginPage.login(SAUCEDEMO_USERS.standard.username, SAUCEDEMO_USERS.standard.password);
-    await page.waitForURL(`${env.SAUCEDEMO_BASE_URL}inventory.html`);
+    await page.waitForURL(joinUrl(env.SAUCEDEMO_BASE_URL, 'inventory.html'));
     await use(page);
   },
 });

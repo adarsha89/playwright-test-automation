@@ -17,10 +17,12 @@ export default defineConfig({
   reporter: [['html'], ['junit', { outputFile: 'reports/junit-results.xml' }]],
   use: {
     baseURL: env.BASE_URL,
-    trace: 'on',//'on-first-retry',
-    video: 'on',//'retain-on-failure',
+    /* Local runs have no retries, so keep traces for any failure there; on CI, record on the first retry. */
+    trace: process.env.CI ? 'on-first-retry' : 'retain-on-failure',
+    video: 'retain-on-failure',
     screenshot: 'only-on-failure',
-    headless: false
+    /* Headed locally for visibility; CI agents (Docker) have no display, so run headless there. */
+    headless: !!process.env.CI,
   },
 
   projects: [

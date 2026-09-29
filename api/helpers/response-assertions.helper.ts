@@ -8,19 +8,16 @@ import type { ZodType } from 'zod';
 
 /** Asserts the response status code and returns the response for chaining. */
 export async function expectStatus(response: APIResponse, code: number): Promise<APIResponse> {
-  expect(
-    response.status(),
-    `Expected status ${code} but got ${response.status()}: ${await response.text()}`,
-  ).toBe(code);
+  expect(response.status(), `Expected status ${code} but got ${response.status()}: ${await response.text()}`).toBe(
+    code,
+  );
   return response;
 }
 
 /** Validates a parsed body against a zod schema, returning the typed, parsed value. */
 export function expectSchema<T>(body: unknown, schema: ZodType<T>): T {
   const result = schema.safeParse(body);
-  expect(result.success, `Response body failed schema validation: ${JSON.stringify(result.error?.issues)}`).toBe(
-    true,
-  );
+  expect(result.success, `Response body failed schema validation: ${JSON.stringify(result.error?.issues)}`).toBe(true);
   return result.data as T;
 }
 
