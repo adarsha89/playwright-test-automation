@@ -1,7 +1,6 @@
 pipeline {
   agent {
-    // Keep the tag in lockstep with the installed @playwright/test version (package-lock.json),
-    // otherwise the image's bundled browsers won't match what the runner expects.
+    // Keep the tag in lockstep with the installed @playwright/test version (package-lock.json), otherwise the image's bundled browsers won't match what the runner expects.
     docker { image 'mcr.microsoft.com/playwright:v1.62.1-noble' }
   }
   parameters {
