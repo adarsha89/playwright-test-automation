@@ -11,6 +11,12 @@ A Playwright + TypeScript test automation framework covering UI and API testing,
 - ESLint (flat config) + Prettier
 - Jenkins (CI), using the `mcr.microsoft.com/playwright` Docker image
 
+## Architecture
+
+![Architecture of the Playwright + TypeScript framework](architecture.svg)
+
+Specs orchestrate only: they use the fixtures layer, which builds page objects and API clients on top of the API helpers, shared config and utils. UI tests run in a shared browser per engine (see [Execution model](#execution-model-one-shared-browser-per-engine)), and every run publishes HTML and JUnit reports.
+
 ## Project structure
 
 ```
