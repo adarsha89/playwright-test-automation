@@ -11,8 +11,10 @@
     "noUncheckedIndexedAccess": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
+    "allowJs": true,
+    "checkJs": true,
     "types": ["node", "@playwright/test"]
   },
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "fixtures/shared-browser/browser-server.mjs"],
   "exclude": ["node_modules", "playwright-report", "test-results", "reports"]
 }
