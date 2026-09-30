@@ -36,3 +36,13 @@ function loadEnv(): Env {
 }
 
 export const env: Env = loadEnv();
+
+/**
+ * True under `--debug` / `PWDEBUG` (mirrors playwright-core's `debugMode()`:
+ * any value except `'0'` / `'false'` enables it). The shared-browser fixture
+ * uses it to fall back to a per-worker browser so the Inspector works.
+ */
+export function isPlaywrightDebugMode(): boolean {
+  const value = process.env.PWDEBUG;
+  return value !== undefined && value !== '' && value !== '0' && value !== 'false';
+}
