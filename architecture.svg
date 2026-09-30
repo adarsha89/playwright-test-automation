@@ -1,0 +1,184 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1580" viewBox="0 0 1600 1580">
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+    <path d="M0,0 L10,5 L0,10 Z" fill="#222"/>
+  </marker>
+  <style>
+    .title{font:700 30px Arial,sans-serif;fill:#111}
+    .head{font:700 25px Arial,sans-serif;fill:#111}
+    .subhead{font:700 19px Arial,sans-serif;fill:#111}
+    .body{font:18px Arial,sans-serif;fill:#111}
+    .small{font:16px Arial,sans-serif;fill:#111}
+    .box{stroke:#222;stroke-width:3}
+    .arrow{stroke:#222;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+  </style>
+</defs>
+
+<rect width="1600" height="1580" fill="white"/>
+<text x="30" y="45" class="title">Playwright + TypeScript (UI + API)</text>
+
+<!-- Utils -->
+<rect x="25" y="120" width="350" height="570" rx="25" fill="#fff0b8" class="box"/>
+<text x="200" y="165" text-anchor="middle" class="head">Utils</text>
+
+<rect x="45" y="195" width="310" height="100" rx="15" fill="white" class="box"/>
+<text x="200" y="235" text-anchor="middle" class="subhead">Logger</text>
+<text x="200" y="262" text-anchor="middle" class="small">(info / warn / error logging)</text>
+
+<rect x="45" y="315" width="310" height="100" rx="15" fill="white" class="box"/>
+<text x="200" y="355" text-anchor="middle" class="subhead">URL Join</text>
+<text x="200" y="382" text-anchor="middle" class="small">(joinUrl: safe base URL + path)</text>
+
+<rect x="45" y="435" width="310" height="100" rx="15" fill="white" class="box"/>
+<text x="200" y="475" text-anchor="middle" class="subhead">Network</text>
+<text x="200" y="502" text-anchor="middle" class="small">(interception, beacon assertions)</text>
+
+<rect x="45" y="555" width="310" height="100" rx="15" fill="white" class="box"/>
+<text x="200" y="595" text-anchor="middle" class="subhead">Browser State</text>
+<text x="200" y="622" text-anchor="middle" class="small">(cookies, storage, permissions, routes)</text>
+
+<!-- Code Quality -->
+<rect x="25" y="740" width="350" height="230" rx="25" fill="#e6d9ff" class="box"/>
+<text x="200" y="785" text-anchor="middle" class="head">Code Quality</text>
+<text x="55" y="830" class="body">TypeScript (strict mode)</text>
+<text x="55" y="862" class="body">ESLint (flat config)</text>
+<text x="55" y="894" class="body">Prettier</text>
+<text x="55" y="926" class="body">Gate: tsc + eslint + prettier</text>
+
+<!-- API Helpers -->
+<rect x="410" y="90" width="710" height="225" rx="25" fill="#d9f2d9" class="box"/>
+<text x="765" y="130" text-anchor="middle" class="head">API Helpers</text>
+
+<rect x="430" y="160" width="215" height="125" rx="15" fill="white" class="box"/>
+<text x="537" y="200" text-anchor="middle" class="subhead">Auth Helper</text>
+<text x="537" y="228" text-anchor="middle" class="small">(login → bearer token,</text>
+<text x="537" y="252" text-anchor="middle" class="small">cached per worker)</text>
+
+<rect x="657" y="160" width="215" height="125" rx="15" fill="white" class="box"/>
+<text x="764" y="200" text-anchor="middle" class="subhead">Request Builder</text>
+<text x="764" y="228" text-anchor="middle" class="small">(base URL, headers,</text>
+<text x="764" y="252" text-anchor="middle" class="small">path, query)</text>
+
+<rect x="885" y="160" width="215" height="125" rx="15" fill="white" class="box"/>
+<text x="992" y="200" text-anchor="middle" class="subhead">Response Assertions</text>
+<text x="992" y="228" text-anchor="middle" class="small">(status checks,</text>
+<text x="992" y="252" text-anchor="middle" class="small">Zod schema validation)</text>
+
+<!-- Shared Config -->
+<rect x="1160" y="55" width="390" height="235" rx="25" fill="#e6d9ff" class="box"/>
+<text x="1355" y="100" text-anchor="middle" class="head">Shared Config</text>
+<text x="1185" y="140" class="body">config/env.ts (Zod-validated .env)</text>
+<text x="1185" y="170" class="body">BASE_URL, SAUCEDEMO_BASE_URL,</text>
+<text x="1185" y="200" class="body">API_BASE_URL, test credentials</text>
+<text x="1185" y="240" class="body">playwright.config.ts: projects,</text>
+<text x="1185" y="270" class="body">retries, workers, reporters</text>
+
+<!-- Page Objects & API Clients -->
+<rect x="480" y="370" width="580" height="260" rx="25" fill="#cfe5fa" class="box"/>
+<text x="770" y="410" text-anchor="middle" class="head">Page Objects &amp; API Clients</text>
+
+<rect x="500" y="430" width="260" height="180" rx="15" fill="white" class="box"/>
+<text x="630" y="465" text-anchor="middle" class="subhead">Page Objects (pages/)</text>
+<text x="630" y="500" text-anchor="middle" class="small">BasePage →</text>
+<text x="630" y="525" text-anchor="middle" class="small">Login, Inventory, Cart,</text>
+<text x="630" y="550" text-anchor="middle" class="small">Example pages</text>
+<text x="630" y="580" text-anchor="middle" class="small">(role / data-test locators)</text>
+
+<rect x="780" y="430" width="260" height="180" rx="15" fill="white" class="box"/>
+<text x="910" y="465" text-anchor="middle" class="subhead">API Clients (api/clients/)</text>
+<text x="910" y="500" text-anchor="middle" class="small">BaseClient →</text>
+<text x="910" y="525" text-anchor="middle" class="small">UsersClient</text>
+<text x="910" y="550" text-anchor="middle" class="small">(typed requests,</text>
+<text x="910" y="580" text-anchor="middle" class="small">ApiError on failure)</text>
+
+<!-- Targets -->
+<ellipse cx="1370" cy="500" rx="180" ry="140" fill="#ffd1d1" stroke="#a22" stroke-width="3"/>
+<text x="1370" y="445" text-anchor="middle" class="head">Targets</text>
+<text x="1370" y="490" text-anchor="middle" class="subhead">SauceDemo (UI)</text>
+<text x="1370" y="525" text-anchor="middle" class="subhead">playwright.dev (UI)</text>
+<text x="1370" y="560" text-anchor="middle" class="subhead">REST API (API_BASE_URL)</text>
+
+<!-- Fixtures Layer -->
+<rect x="480" y="690" width="580" height="240" rx="25" fill="#d9f2d9" class="box"/>
+<text x="770" y="735" text-anchor="middle" class="head">Fixtures Layer (fixtures/index.ts)</text>
+<text x="505" y="780" class="body">test.extend, imported by every spec</text>
+<text x="505" y="815" class="body">Test: authenticatedPage, sauceDemoAuthenticatedPage,</text>
+<text x="505" y="845" class="body">exampleClient, testData</text>
+<text x="505" y="880" class="body">Worker: authToken, sharedBrowser,</text>
+<text x="505" y="910" class="body">connectOptions override</text>
+
+<!-- Shared Browser per Engine -->
+<rect x="1160" y="690" width="410" height="300" rx="25" fill="#ffe0c2" class="box"/>
+<text x="1365" y="735" text-anchor="middle" class="head">Shared Browser per Engine</text>
+<text x="1180" y="775" class="body">setup_&lt;engine&gt; starts one detached</text>
+<text x="1180" y="805" class="body">browser server (127.0.0.1)</text>
+<text x="1180" y="840" class="body">All UI projects on the engine share it</text>
+<text x="1180" y="870" class="body">Every worker connects via wsEndpoint</text>
+<text x="1180" y="900" class="body">New BrowserContext + Page per test</text>
+<text x="1180" y="935" class="body">teardown_&lt;engine&gt; stops it after the</text>
+<text x="1180" y="965" class="body">last project (watchdog on interrupt)</text>
+
+<!-- Test Layer -->
+<rect x="480" y="1000" width="580" height="210" rx="25" fill="#d9f2d9" class="box"/>
+<text x="770" y="1045" text-anchor="middle" class="head">Test Layer (tests/)</text>
+<text x="505" y="1085" class="body">ui/ — chromium, firefox, webkit, new_webkit</text>
+<text x="505" y="1117" class="body">api/ — api project (no browser)</text>
+<text x="505" y="1149" class="body">ui/framework/ — @framework verification</text>
+<text x="505" y="1181" class="body">Tags: classification + unique scenario tag</text>
+
+<!-- Test Data -->
+<rect x="190" y="1290" width="450" height="230" rx="25" fill="#cfe5fa" class="box"/>
+<text x="415" y="1335" text-anchor="middle" class="head">Test Data (data/)</text>
+<text x="220" y="1380" class="body">builders/ — Faker-backed data builders</text>
+<text x="220" y="1412" class="body">saucedemo/ — static users and products</text>
+<text x="220" y="1444" class="body">framework/ — framework test data</text>
+<text x="220" y="1476" class="body">No inline literals in specs</text>
+
+<!-- Reporting & CI -->
+<rect x="760" y="1290" width="760" height="250" rx="25" fill="#e6d9ff" class="box"/>
+<text x="1140" y="1335" text-anchor="middle" class="head">Reporting &amp; CI</text>
+<text x="790" y="1380" class="body">HTML reporter (playwright-report/)</text>
+<text x="790" y="1412" class="body">JUnit → reports/junit-results.xml</text>
+<text x="790" y="1444" class="body">Trace / video / screenshot on failure</text>
+<text x="790" y="1476" class="body">Jenkinsfile: Playwright Docker image, lint / typecheck / Prettier,</text>
+<text x="790" y="1508" class="body">sharded headless runs, publishes JUnit + HTML report</text>
+
+<!-- Arrows -->
+<path d="M910 370 L910 315" class="arrow"/>
+<text x="925" y="348" class="small">Uses helpers</text>
+
+<path d="M1200 290 L1065 390" class="arrow"/>
+<text x="1165" y="325" class="small">Provides base URLs,</text>
+<text x="1165" y="345" class="small">credentials</text>
+
+<path d="M1060 520 L1190 520" class="arrow"/>
+<text x="1075" y="480" class="small">Drive UI /</text>
+<text x="1075" y="500" class="small">call REST</text>
+
+<path d="M770 690 L770 630" class="arrow"/>
+<text x="790" y="665" class="small">Builds page objects and clients</text>
+
+<path d="M1060 800 L1160 800" class="arrow"/>
+<text x="1068" y="765" class="small">connects via</text>
+<text x="1068" y="785" class="small">wsEndpoint</text>
+
+<path d="M1370 690 L1370 640" class="arrow"/>
+<text x="1385" y="672" class="small">Loads pages</text>
+
+<path d="M375 640 L480 780" class="arrow"/>
+<text x="390" y="560" class="small">Used by</text>
+<text x="390" y="580" class="small">fixtures,</text>
+<text x="390" y="600" class="small">clients,</text>
+<text x="390" y="620" class="small">tests</text>
+
+<path d="M770 1000 L770 930" class="arrow"/>
+<text x="790" y="956" class="small">Uses fixtures ({ test, expect }),</text>
+<text x="790" y="976" class="small">page objects and clients</text>
+
+<path d="M415 1290 L560 1210" class="arrow"/>
+<text x="300" y="1250" class="small">Provides test data</text>
+
+<path d="M900 1210 L900 1290" class="arrow"/>
+<text x="915" y="1245" class="small">Generates results, traces,</text>
+<text x="915" y="1265" class="small">videos and JUnit XML</text>
+</svg>
