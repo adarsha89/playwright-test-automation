@@ -16,10 +16,10 @@ import { logger } from '../../utils/logger';
 
 teardown(
   'stops the shared browser after every UI project on this engine',
-  { tag: ['@framework', '@teardown-shared-browser'] },
+  { tag: ['@p3', '@framework', '@teardown-shared-browser'] },
   async ({}, testInfo) => {
     const engine = engineFromTeardownName(testInfo.project.name);
-
+    logger.info('Entered browser teardown for ' + engine);
     const stop = await stopSharedBrowserServer(engine);
     logger.info(formatSharedBrowserSummary(engine, stop));
 

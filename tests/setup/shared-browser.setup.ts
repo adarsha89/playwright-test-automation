@@ -20,10 +20,11 @@ import { logger } from '../../utils/logger';
 
 setup(
   'starts the shared browser for every UI project on this engine',
-  { tag: ['@framework', '@setup-shared-browser'] },
+  { tag: ['@p3', '@framework', '@setup-shared-browser'] },
   async ({ browserName, headless, channel, launchOptions, playwright }, testInfo) => {
     setup.setTimeout(SHARED_BROWSER_START_TIMEOUT_MS + 15_000);
     const engine = engineFromSetupName(testInfo.project.name);
+    logger.info('Entered browser setup for ' + engine);
     expect(toSharedBrowserName(browserName)).toBe(engine);
     const uiProjects = testInfo.config.projects
       .filter((project) => project.dependencies.includes(testInfo.project.name))

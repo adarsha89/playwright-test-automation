@@ -39,7 +39,7 @@ test.describe('Shared browser across workers', () => {
   for (const probe of SHARED_BROWSER_PROBES) {
     test(
       `uses the project's single shared browser from every worker (probe ${probe.id})`,
-      { tag: ['@regression', '@framework', `@${probe.tag}`] },
+      { tag: ['@p3', '@regression', '@framework', `@${probe.tag}`] },
       async ({ browser, context, page, browserName, sharedBrowser, connectOptions }, testInfo) => {
         // eslint-disable-next-line playwright/no-skipped-test -- runtime skip required by AC-6 (1 worker cannot show sharing)
         test.skip(
@@ -115,7 +115,7 @@ test.describe('Fresh context per test', () => {
 
   test(
     'first test in a worker writes cookies, storage, permissions and routes into its own context',
-    { tag: ['@regression', '@framework', '@isolated-context-first-test-writes-state'] },
+    { tag: ['@p3', '@regression', '@framework', '@isolated-context-first-test-writes-state'] },
     async ({ browser, context, page }) => {
       expect(browser.contexts()).toHaveLength(1);
       expect(browser.contexts()[0]).toBe(context);
@@ -145,7 +145,7 @@ test.describe('Fresh context per test', () => {
 
   test(
     'next test in the same worker gets a new context with none of that state',
-    { tag: ['@regression', '@framework', '@isolated-context-next-test-starts-clean'] },
+    { tag: ['@p3', '@regression', '@framework', '@isolated-context-next-test-starts-clean'] },
     async ({ browser, context, page }) => {
       expect(previousContext).toBeDefined();
       expect(context).not.toBe(previousContext);
@@ -164,7 +164,7 @@ test.describe('Fresh context per test', () => {
 
 test(
   "wires the project to its engine's shared setup_<engine> dependency with no global setup",
-  { tag: ['@regression', '@framework', '@shared-browser-project-wiring'] },
+  { tag: ['@p3', '@regression', '@framework', '@shared-browser-project-wiring'] },
   async ({ browserName }, testInfo) => {
     const projectName = testInfo.project.name;
     const setupName = setupProjectName(browserName);

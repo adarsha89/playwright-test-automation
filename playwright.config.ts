@@ -2,12 +2,34 @@ import { defineConfig, devices } from '@playwright/test';
 import { env } from './config/env';
 import { sharedBrowserProjects } from './fixtures/shared-browser/projects';
 
+if (process.env.CI && env.MUTATION_ENABLED) {
+  throw new Error('MUTATION_ENABLED=true is not allowed in CI. Set it to false or unset it.');
+}
+
+// Filter at the UI/API project level so shared-browser setup/teardown projects still run.
+const mutationGrep = env.MUTATION_ENABLED ? /@mutation-target/ : undefined;
+const uiProjects = [
+  { name: 'chromium', testMatch: 'ui/**/*.spec.ts', grep: mutationGrep, use: { ...devices['Desktop Chrome'] } },
+  { name: 'firefox', testMatch: 'ui/**/*.spec.ts', grep: mutationGrep, use: { ...devices['Desktop Firefox'] } },
+  { name: 'webkit', testMatch: 'ui/**/*.spec.ts', grep: mutationGrep, use: { ...devices['Desktop Safari'] } },
+  { name: 'new_webkit', testMatch: 'ui/**/*.spec.ts', grep: mutationGrep, use: { ...devices['Desktop Safari'] } },
+];
+const apiProject = {
+  name: 'api',
+  testMatch: 'api/**/*.spec.ts',
+  grep: mutationGrep,
+  use: {
+    baseURL: env.API_BASE_URL,
+  },
+};
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
+
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only (framework-guidelines principle g). */
@@ -15,7 +37,7 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 2 : undefined,
   /* HTML for local review, JUnit for the Jenkins JUnit plugin. */
-  reporter: [['html'], ['junit', { outputFile: 'reports/junit-results.xml' }]],
+  reporter: [['html'], ['junit', { outputFile: 'reports/junit-results.xml' }], ['blob']],
   use: {
     baseURL: env.BASE_URL,
     /* Local runs have no retries, so keep traces for any failure there; on CI, record on the first retry. */
@@ -26,25 +48,6 @@ export default defineConfig({
     headless: !!process.env.CI,
   },
 
-  /*
-   * UI projects share ONE browser per engine: sharedBrowserProjects() adds one setup_<engine> dependency
-   * (starts the engine's shared browser) and teardown_<engine> (stops it after the last project on it);
-   * every test still gets a new context. Project names are free-form (e.g. 'smoke_chromium'); the engine
-   * comes from `use`. See README "Execution model".
-   */
-  projects: [
-    ...sharedBrowserProjects([
-      { name: 'chromium', testMatch: 'ui/**/*.spec.ts', use: { ...devices['Desktop Chrome'] } },
-      { name: 'firefox', testMatch: 'ui/**/*.spec.ts', use: { ...devices['Desktop Firefox'] } },
-      { name: 'webkit', testMatch: 'ui/**/*.spec.ts', use: { ...devices['Desktop Safari'] } },
-      { name: 'new_webkit', testMatch: 'ui/**/*.spec.ts', use: { ...devices['Desktop Safari'] } },
-    ]),
-    {
-      name: 'api',
-      testMatch: 'api/**/*.spec.ts',
-      use: {
-        baseURL: env.API_BASE_URL,
-      },
-    },
-  ],
+  /* Mutation runs omit shared-browser lifecycle projects and use per-worker browsers. */
+  projects: env.MUTATION_ENABLED ? [...uiProjects, apiProject] : [...sharedBrowserProjects(uiProjects), apiProject],
 });
