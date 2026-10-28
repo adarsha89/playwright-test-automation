@@ -1,0 +1,146 @@
+.
+├── .ai
+│   ├── README.md
+│   ├── agents
+│   │   ├── automation-orchestrator-agent.md
+│   │   ├── automation-planner-agent.md
+│   │   ├── code-implementation-agent.md
+│   │   ├── code-quality-agent.md
+│   │   ├── code-review-agent.md
+│   │   ├── framework-setup-agent.md
+│   │   ├── linkedin-post-writer-agent.md
+│   │   └── task-analysis-agent.md
+│   ├── context
+│   │   ├── ai-assistant-instructions.md
+│   │   ├── automation-pipeline-learnings.md
+│   │   ├── framework-design-principles.md
+│   │   ├── test-tagging.md
+│   │   └── ui-automation-workflow.md
+│   └── skills
+│       ├── analyze-task
+│       │   └── SKILL.md
+│       ├── check-code-quality
+│       │   └── SKILL.md
+│       ├── make-code-changes
+│       │   └── SKILL.md
+│       ├── orchestrate-automation
+│       │   └── SKILL.md
+│       ├── plan-automation-code-changes
+│       │   └── SKILL.md
+│       ├── review-code-changes
+│       │   └── SKILL.md
+│       ├── setup-playwright-automation-framework
+│       │   └── SKILL.md
+│       └── write-linkedin-learning-post
+│           ├── SKILL.md
+│           └── scripts
+│               ├── bold.mjs
+│               ├── keep-breaks.mjs
+│               └── validate-post.mjs
+├── .claude
+│   ├── agents -> ../.ai/agents
+│   ├── settings.local.json
+│   └── skills -> ../.ai/skills
+├── .env
+├── .env.example
+├── .mcp.json
+├── .prettierrc
+├── AGENTS.md
+├── CLAUDE.md
+├── Jenkinsfile
+├── README.md
+├── api
+│   ├── clients
+│   │   ├── base.client.ts
+│   │   └── example.client.ts
+│   └── helpers
+│       ├── auth.helper.ts
+│       ├── request-builder.helper.ts
+│       └── response-assertions.helper.ts
+├── architecture.svg
+├── config
+│   └── env.ts
+├── data
+│   ├── builders
+│   │   ├── example.builder.ts
+│   │   └── state-marker.builder.ts
+│   ├── framework
+│   │   └── shared-browser.data.ts
+│   └── saucedemo
+│       └── saucedemo-users.data.ts
+├── docs
+│   ├── linkedin-posts
+│   │   ├── 2026-09-29-page-objects-expose-locators.txt
+│   │   ├── 2026-09-29-playwright-vs-selenium-cypress-webdriverio-comparison.html
+│   │   ├── 2026-09-29-playwright-vs-selenium-cypress-webdriverio-comparison.png
+│   │   ├── 2026-09-29-playwright-vs-selenium-cypress-webdriverio.md
+│   │   ├── 2026-09-29-playwright-vs-selenium-cypress-webdriverio.txt
+│   │   ├── 2026-09-29-playwright-waits-vs-selenium.md
+│   │   └── 2026-09-29-playwright-waits-vs-selenium.txt
+│   ├── plans
+│   │   └── shared-browser-per-project-plan.md
+│   ├── reports
+│   │   ├── code-quality-2026-09-30.md
+│   │   ├── framework-improvements-implementation-summary.md
+│   │   ├── shared-browser-per-project-implementation-summary.md
+│   │   ├── shared-browser-per-project-orchestration-log.md
+│   │   ├── shared-browser-per-project-orchestration-summary.md
+│   │   └── shared-browser-per-project-review-cycle-1.md
+│   ├── requirements
+│   │   └── shared-browser-per-project-requirements.md
+│   └── skills_and_agents_requirements.txt
+├── eslint.config.mjs
+├── filetree.txt
+├── fixtures
+│   ├── index.ts
+│   └── shared-browser
+│       ├── browser-server.mjs
+│       ├── client.ts
+│       ├── errors.ts
+│       ├── lifecycle.ts
+│       ├── projects.ts
+│       ├── state.ts
+│       └── types.ts
+├── package-lock.json
+├── package.json
+├── pages
+│   ├── base.page.ts
+│   ├── example.page.ts
+│   └── saucedemo
+│       ├── cart.page.ts
+│       ├── inventory.page.ts
+│       └── login.page.ts
+├── playwright-report
+│   └── index.html
+├── playwright.config.ts
+├── reports
+│   ├── eslint-report.json
+│   └── junit-results.xml
+├── specs
+│   └── README.md
+├── test-results
+│   └── .last-run.json
+├── tests
+│   ├── api
+│   │   └── example.spec.ts
+│   ├── seed.spec.ts
+│   ├── setup
+│   │   ├── shared-browser.setup.ts
+│   │   └── shared-browser.teardown.ts
+│   └── ui
+│       ├── example.spec.ts
+│       ├── framework
+│       │   ├── shared-browser-errors.spec.ts
+│       │   └── shared-browser.spec.ts
+│       └── saucedemo
+│           ├── cart.spec.ts
+│           └── login.spec.ts
+├── to_be_automated.md
+├── tsconfig.json
+└── utils
+    ├── browser-state.ts
+    ├── logger.ts
+    ├── network.ts
+    └── url.ts
+
+45 directories, 99 files

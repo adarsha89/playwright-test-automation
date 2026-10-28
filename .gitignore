@@ -42,5 +42,6 @@ coverage/
 # AI related
 .claude
 .ai
+.agents
 CLAUDE.md
 AGENTS.md

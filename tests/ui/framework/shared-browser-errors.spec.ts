@@ -36,7 +36,7 @@ import {
 test.describe('Shared browser error reporting', () => {
   test(
     'reports a shared browser that cannot start as a failed setup with its cause',
-    { tag: ['@regression', '@framework', '@shared-browser-launch-failure-reported'] },
+    { tag: ['@p3', '@regression', '@framework', '@shared-browser-launch-failure-reported'] },
     async ({ browserName }) => {
       test.setTimeout(SHARED_BROWSER_START_TIMEOUT_MS + 15_000);
       const engine = toSharedBrowserName(browserName);
@@ -66,7 +66,7 @@ test.describe('Shared browser error reporting', () => {
 
   test(
     'reports a crashed shared browser with the project, engine and server pid',
-    { tag: ['@regression', '@framework', '@shared-browser-crash-reported'] },
+    { tag: ['@p3', '@regression', '@framework', '@shared-browser-crash-reported'] },
     async ({ browserName, browser }) => {
       const engine = toSharedBrowserName(browserName);
       const privateKey = `${PRIVATE_CRASH_PREFIX}${engine}`;
@@ -96,7 +96,7 @@ test.describe('Shared browser error reporting', () => {
 
   test(
     'reports a missing shared browser and points at the setup project',
-    { tag: ['@regression', '@framework', '@shared-browser-missing-state-reported'] },
+    { tag: ['@p3', '@regression', '@framework', '@shared-browser-missing-state-reported'] },
     async ({ browserName }) => {
       const engine = toSharedBrowserName(browserName);
       const privateKey = `${PRIVATE_MISSING_PREFIX}${engine}`;

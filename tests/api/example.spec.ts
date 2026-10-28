@@ -13,7 +13,7 @@ import { expectSchema } from '../../api/helpers/response-assertions.helper';
  * it (see .env.example).
  */
 test.describe('Users API', () => {
-  test('fetches a user by id', { tag: ['@api', '@api-fetch-user-by-id'] }, async ({ exampleClient }) => {
+  test('fetches a user by id', { tag: ['@p3', '@api', '@api-fetch-user-by-id'] }, async ({ exampleClient }) => {
     const user = await exampleClient.getUser(1);
 
     const validated = expectSchema(user, userSchema);
@@ -22,7 +22,7 @@ test.describe('Users API', () => {
 
   test(
     'creates a user from generated test data',
-    { tag: ['@api', '@api-create-user'] },
+    { tag: ['@p3', '@api', '@api-create-user'] },
     async ({ exampleClient, testData }) => {
       const created = await exampleClient.createUser(testData.user);
 

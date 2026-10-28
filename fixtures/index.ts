@@ -78,11 +78,14 @@ interface WorkerFixtures {
  */
 export const test = base.extend<TestFixtures, WorkerFixtures>({
   // Lazy: only instantiated through `connectOptions` -> `browser`, i.e. by tests that use a browser.
+
   sharedBrowser: [
     async ({ browserName }, use, workerInfo) => {
-      if (isPlaywrightDebugMode()) {
+      if (env.MUTATION_ENABLED || isPlaywrightDebugMode()) {
         logger.info(
-          '[shared-browser] --debug/PWDEBUG detected: using a per-worker browser for Inspector compatibility',
+          env.MUTATION_ENABLED
+            ? '[shared-browser] mutation mode detected: using a per-worker browser without lifecycle projects'
+            : '[shared-browser] --debug/PWDEBUG detected: using a per-worker browser for Inspector compatibility',
         );
         await use(null);
         return;

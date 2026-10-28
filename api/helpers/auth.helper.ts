@@ -23,7 +23,7 @@ export class AuthHelper {
       return this.cachedToken;
     }
 
-    logger.info('Authenticating API user for worker session');
+    logger.info('Authenticating API user for worker session', '');
 
     const response = await this.request.post(`${getApiBaseUrl()}/auth/login`, {
       data: {

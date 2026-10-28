@@ -20,6 +20,10 @@ const envSchema = z.object({
   API_AUTH_USERNAME: z.string().min(1),
   API_AUTH_PASSWORD: z.string().min(1),
   SAUCEDEMO_BASE_URL: z.string().url(),
+  MUTATION_ENABLED: z
+    .enum(['true', 'false'])
+    .default('false')
+    .transform((value) => value === 'true'),
 });
 
 export type Env = z.infer<typeof envSchema>;
